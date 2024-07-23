@@ -33,4 +33,8 @@ while not flag:
             initial_counter = vs_counter
     else:
         print(f"Sorry, that's wrong, your final score is: {score}")
-        flag = True
+        restart = input('Do you wanna play another game? "Yes" or "No" ').lower()
+        if restart == 'yes':
+            score = 0
+        elif restart == 'no':
+            flag = True
