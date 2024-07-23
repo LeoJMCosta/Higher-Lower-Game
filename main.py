@@ -5,29 +5,32 @@ import random
 
 print(logo)
 
-def counter():
-    score = 0
-    initial_counter = random.choice(data)
+score = 0
 
-    name = initial_counter['name']
-    follower_count1 = initial_counter['follower_count']
-    description = initial_counter['description']
-    country = initial_counter['country']
-    print(f"Compare A: {name}, a {description}, from {country}")
+flag = False
 
-    print(vs)
+initial_counter = random.choice(data)
 
+while not flag:
     vs_counter = random.choice(data)
 
-    name = vs_counter['name']
-    follower_count2 = vs_counter['follower_count']
-    description = vs_counter['description']
-    country = vs_counter['country']
-    print(f"Againt B: {name}, a {description}, from {country}")
+    while vs_counter == initial_counter:
+        vs_counter == random.choice(data)
 
-    if follower_count1 > follower_count2:
+    print(f"Compare A: {initial_counter['name']}, a {initial_counter['description']}, from {initial_counter['country']}")
+    print(vs)
+    print(f"Against B: {vs_counter['name']}, a {vs_counter['description']}, from {vs_counter['country']}")
+
+    guess = input(f"Who has more followers? Type 'A' or 'B': ").lower()
+
+    if (guess == 'a' and initial_counter["follower_count"] > vs_counter["follower_count"]) or \
+       (guess == 'b' and vs_counter["follower_count"] > initial_counter["follower_count"]):
         score += 1
-        print(score)
-
-
-counter()
+        print(f"You're right! Current score: {score}")
+        if guess == 'a':
+            initial_counter = initial_counter  # No change needed
+        else:
+            initial_counter = vs_counter
+    else:
+        print(f"Sorry, that's wrong, your final score is: {score}")
+        flag = True
